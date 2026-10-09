@@ -1,4 +1,4 @@
-export const config = { runtime: "nodejs22.x" };
+export const config = { runtime: "nodejs" };
 
 import { clearSessionCookie } from "../server/auth-session";
 
