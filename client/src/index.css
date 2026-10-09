@@ -155,3 +155,8 @@ textarea { resize: vertical; min-height: 78px; }
 .sidebar-logo { width: 178px; height: 64px; border-radius: 8px; }
 .auth-logo { width: 112px; height: 112px; border-radius: 18px; }
 .auth-brand { min-height: 112px; }
+
+/* Keep the two date controls inside the field card at every width. */
+.date-pair { width: 100%; min-width: 0; }
+.date-pair input { flex: 1 1 0; width: 0; min-width: 0; }
+.date-pair span { flex: 0 0 auto; }
