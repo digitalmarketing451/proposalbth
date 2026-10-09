@@ -1,10 +1,16 @@
 import { createSession, findAccount, setSessionCookie } from "./_auth";
 
+function send(res: any, status: number, body: unknown) {
+  res.statusCode = status;
+  res.setHeader("Content-Type", "application/json; charset=utf-8");
+  res.end(JSON.stringify(body));
+}
+
 export default function handler(req: any, res: any) {
-  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
-  const { email, password } = req.body || {};
-  const user = findAccount(String(email || ""), String(password || ""));
-  if (!user) return res.status(401).json({ error: "Email atau password salah." });
+  if (req.method !== "POST") return send(res, 405, { error: "Method not allowed" });
+  const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : (req.body || {});
+  const user = findAccount(String(body.email || ""), String(body.password || ""));
+  if (!user) return send(res, 401, { error: "Email atau password salah." });
   setSessionCookie(res, createSession(user));
-  return res.status(200).json({ user });
+  return send(res, 200, { user });
 }
