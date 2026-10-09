@@ -7,7 +7,7 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undef
 export const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null;
 export const isSupabaseConfigured = Boolean(supabase);
 
-export async function saveProposalToSupabase(proposal: Proposal) {
+export async function saveProposalToSupabase(proposal: Proposal, actor?: string) {
   if (!supabase) return { ok: false, reason: "demo-mode" } as const;
   const { error } = await supabase.from("proposals").upsert({
     id: proposal.id,
@@ -29,6 +29,7 @@ export async function saveProposalToSupabase(proposal: Proposal) {
     description: proposal.description,
     dp_percent: proposal.dpPercent,
     validity_days: proposal.validityDays,
+    created_by: actor ?? proposal.sales,
     updated_at: proposal.updatedAt,
   });
   if (error) return { ok: false, reason: error.message } as const;

@@ -6,7 +6,8 @@ export type ProposalStatus =
   | "Dilihat Klien"
   | "Disetujui Klien"
   | "Ditolak"
-  | "Kedaluwarsa";
+  | "Kedaluwarsa"
+  | "Cancel";
 
 export type Activity = {
   id: string;
@@ -223,6 +224,6 @@ export function getStatusTone(status: ProposalStatus) {
   if (status === "Disetujui Klien") return "success";
   if (status === "Menunggu Approval") return "warning";
   if (status === "Terkirim" || status === "Dilihat Klien") return "info";
-  if (status === "Ditolak" || status === "Kedaluwarsa") return "danger";
+  if (status === "Ditolak" || status === "Kedaluwarsa" || status === "Cancel") return "danger";
   return "muted";
 }
