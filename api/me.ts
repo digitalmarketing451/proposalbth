@@ -1,4 +1,6 @@
-import { readSession } from "./_auth";
+export const config = { runtime: "nodejs22.x" };
+
+import { readSession } from "../server/auth-session";
 
 function send(res: any, status: number, body: unknown) {
   res.statusCode = status;

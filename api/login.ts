@@ -1,4 +1,6 @@
-import { createSession, findAccount, setSessionCookie } from "./_auth";
+export const config = { runtime: "nodejs22.x" };
+
+import { createSession, findAccount, setSessionCookie } from "../server/auth-session";
 
 function send(res: any, status: number, body: unknown) {
   res.statusCode = status;

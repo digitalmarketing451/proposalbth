@@ -1,4 +1,6 @@
-import { clearSessionCookie } from "./_auth";
+export const config = { runtime: "nodejs22.x" };
+
+import { clearSessionCookie } from "../server/auth-session";
 
 export default function handler(req: any, res: any) {
   if (req.method !== "POST") { res.statusCode = 405; return res.end("Method not allowed"); }
