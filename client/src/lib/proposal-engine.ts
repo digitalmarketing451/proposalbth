@@ -2,6 +2,7 @@ export type ProposalStatus =
   | "Draft"
   | "Menunggu Approval"
   | "Disetujui Internal"
+  | "Disetujui"
   | "Terkirim"
   | "Dilihat Klien"
   | "Disetujui Klien"
@@ -43,6 +44,8 @@ export type ProposalOption = {
   id: string;
   name: string;
   hotelId?: string;
+  hotelName?: string;
+  roomCount?: number;
   pricePerPerson: number;
   pricingMode: "manual" | "kalkulasi";
   recommended?: boolean;
@@ -221,7 +224,7 @@ export function validateItinerary(proposal: Proposal) {
 }
 
 export function getStatusTone(status: ProposalStatus) {
-  if (status === "Disetujui Klien") return "success";
+  if (status === "Disetujui Klien" || status === "Disetujui") return "success";
   if (status === "Menunggu Approval") return "warning";
   if (status === "Terkirim" || status === "Dilihat Klien") return "info";
   if (status === "Ditolak" || status === "Kedaluwarsa" || status === "Cancel") return "danger";
