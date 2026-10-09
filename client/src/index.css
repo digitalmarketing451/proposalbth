@@ -113,7 +113,18 @@ textarea { resize: vertical; min-height: 78px; }
   .builder-page { padding: 0; }
   .builder-layout { display: block; }
   .preview-rail { display: block !important; position: static; max-height: none; overflow: visible; padding: 0; border: 0; background: #fff; box-shadow: none; }
-  .proposal-sheet { max-width: none; width: 210mm; min-height: 297mm; margin: 0; box-shadow: none; page-break-after: always; }
+  .proposal-sheet, .proposal-sheet * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .proposal-sheet { max-width: none; width: 210mm; min-height: 297mm; margin: 0; box-shadow: none; page-break-after: always; background: #fff !important; }
+  .proposal-header { color: #fff !important; background: linear-gradient(110deg, #10233e, #286b9e) !important; border-bottom: 3px solid #f4b942 !important; }
+  .proposal-header small { color: #c7d8e8 !important; }
+  .proposal-badge { background: rgba(123,190,229,.28) !important; border-color: rgba(255,255,255,.22) !important; }
+  .proposal-info-grid { background: #f5f7f9 !important; }
+  .itinerary-preview-head { background: #eef4f8 !important; }
+  .price-preview-head { background: #173c66 !important; color: #fff !important; }
+  .flight-preview { background: #fff8dc !important; border-left-color: #f4b942 !important; }
+  .included-box { background: #eef9f1 !important; }
+  .excluded-box { background: #fff1f1 !important; }
+  .terms-preview { background: #f5f7f9 !important; }
   @page { size: A4 portrait; margin: 0; }
 }
 
