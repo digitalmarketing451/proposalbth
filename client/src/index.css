@@ -139,3 +139,8 @@ textarea { resize: vertical; min-height: 78px; }
 .button-danger { color: #fff; background: #b84448; border: 1px solid #b84448; }
 .button-danger:hover { background: #98373b; }
 @media (max-width: 680px) { .auth-card { padding: 24px 19px; } .review-status-actions .button { flex: 1 1 calc(50% - 9px); } }
+
+.brand-logo { display: block; object-fit: contain; object-position: center; }
+.sidebar-logo { width: 178px; height: 64px; border-radius: 8px; }
+.auth-logo { width: 112px; height: 112px; border-radius: 18px; }
+.auth-brand { min-height: 112px; }
