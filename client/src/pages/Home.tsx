@@ -13,6 +13,7 @@ import {
   type Activity, type ItineraryDay, type Proposal, type ProposalOption, type ProposalStatus,
 } from "@/lib/proposal-engine";
 import { isSupabaseConfigured, saveProposalToSupabase } from "@/lib/supabase";
+import { MasterDataManager } from "@/components/MasterDataManager";
 
 type AuthUser = { email: string; name: string; role: "senior_sales_manager" | "sales_manager" };
 type View = "dashboard" | "proposals" | "builder" | "master" | "settings";
@@ -21,6 +22,7 @@ type Step = 1 | 2 | 3 | 4 | 5 | 6;
 const navItems: { id: View; label: string; icon: typeof FileText }[] = [
   { id: "builder", label: "Generator Proposal", icon: FileText },
   { id: "proposals", label: "Proposal Tersimpan", icon: ClipboardList },
+  { id: "master", label: "Master Data", icon: Building2 },
 ];
 
 const statusLabels: ProposalStatus[] = ["Draft", "Menunggu Approval", "Terkirim", "Disetujui", "Disetujui Klien", "Ditolak", "Kedaluwarsa", "Cancel"];
@@ -132,6 +134,6 @@ export default function Home() {
   const saveProposals = (next: Proposal[]) => { setProposals(next); localStorage.setItem(storageKey, JSON.stringify(next)); };
   const openProposal = (proposal: Proposal) => { setEditing(proposal); setView("builder"); };
   const saveProposal = async (proposal: Proposal) => { saveProposals([proposal, ...proposals.filter(item => item.id !== proposal.id)]); setEditing(undefined); setView("proposals"); };
-const render = view === "builder" ? <Wizard initialProposal={editing} onSave={async proposal => { const result = await saveProposalToSupabase(proposal, auth.email); if (result.ok) toast.success("Proposal tersimpan ke Supabase."); else toast.error("Proposal tersimpan lokal.", { description: `Supabase: ${result.reason}` }); await saveProposal(proposal); }} onBack={() => { setEditing(undefined); setView("proposals"); }} /> : view === "proposals" ? <ProposalsView proposals={proposals} setView={setView} openProposal={openProposal} setProposals={setProposals} storageKey={storageKey} /> : view === "master" ? <MasterData setView={setView} /> : view === "settings" ? <SettingsView /> : <Wizard onSave={saveProposal} onBack={() => setView("proposals")} />;
+const render = view === "builder" ? <Wizard initialProposal={editing} onSave={async proposal => { const result = await saveProposalToSupabase(proposal, auth.email); if (result.ok) toast.success("Proposal tersimpan ke Supabase."); else toast.error("Proposal tersimpan lokal.", { description: `Supabase: ${result.reason}` }); await saveProposal(proposal); }} onBack={() => { setEditing(undefined); setView("proposals"); }} /> : view === "proposals" ? <ProposalsView proposals={proposals} setView={setView} openProposal={openProposal} setProposals={setProposals} storageKey={storageKey} /> : view === "master" ? <MasterDataManager userEmail={auth.email} /> : view === "settings" ? <SettingsView /> : <Wizard onSave={saveProposal} onBack={() => setView("proposals")} />;
   return <AppShell view={view} setView={setView} user={auth} onLogout={logout}>{render}</AppShell>;
 }
