@@ -180,3 +180,5 @@ textarea { resize: vertical; min-height: 78px; }
   .master-editor-actions { justify-content: stretch; }
   .master-editor-actions .button { flex: 1; }
 }
+
+.add-day-button { margin-top: 16px; width: 100%; }
